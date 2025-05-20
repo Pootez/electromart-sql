@@ -5,7 +5,7 @@
 -- Dumped from database version 17.5
 -- Dumped by pg_dump version 17.5
 
--- Started on 2025-05-20 11:32:35
+-- Started on 2025-05-20 11:48:11
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -364,10 +364,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.us
 -- Data for Name: brand; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.brand (id, name, description) FROM stdin;
-1	Samsung	Consumer electronics
-2	Apple	Mainly smartphones
-\.
+INSERT INTO public.brand VALUES (1, 'Samsung', 'Consumer electronics');
+INSERT INTO public.brand VALUES (2, 'Apple', 'Mainly smartphones');
 
 
 --
@@ -376,10 +374,8 @@ COPY public.brand (id, name, description) FROM stdin;
 -- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.category (id, name, description) FROM stdin;
-1	Smartphones	All smartphones
-2	Tablets	All tablets
-\.
+INSERT INTO public.category VALUES (1, 'Smartphones', 'All smartphones');
+INSERT INTO public.category VALUES (2, 'Tablets', 'All tablets');
 
 
 --
@@ -388,11 +384,9 @@ COPY public.category (id, name, description) FROM stdin;
 -- Data for Name: orderitem; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.orderitem (id, orderid, productid, quantity, subtotal) FROM stdin;
-1	2	3	1	9999.00
-2	3	1	1	8999.00
-3	1	2	1	12999.00
-\.
+INSERT INTO public.orderitem VALUES (1, 2, 3, 1, 9999.00);
+INSERT INTO public.orderitem VALUES (2, 3, 1, 1, 8999.00);
+INSERT INTO public.orderitem VALUES (3, 1, 2, 1, 12999.00);
 
 
 --
@@ -401,11 +395,9 @@ COPY public.orderitem (id, orderid, productid, quantity, subtotal) FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.orders (id, userid, totalamount, orderdate, address) FROM stdin;
-1	3	8999.00	2025-01-01 00:00:00+01	Lillegata 33
-2	2	12999.00	2025-02-02 00:00:00+01	Storgata 22
-3	1	9999.00	2025-03-03 00:00:00+01	Kongeveien 1
-\.
+INSERT INTO public.orders VALUES (1, 3, 8999.00, '2025-01-01 00:00:00+01', 'Lillegata 33');
+INSERT INTO public.orders VALUES (2, 2, 12999.00, '2025-02-02 00:00:00+01', 'Storgata 22');
+INSERT INTO public.orders VALUES (3, 1, 9999.00, '2025-03-03 00:00:00+01', 'Kongeveien 1');
 
 
 --
@@ -414,11 +406,9 @@ COPY public.orders (id, userid, totalamount, orderdate, address) FROM stdin;
 -- Data for Name: payment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment (id, orderid, amount, paymentdate) FROM stdin;
-1	2	12999.00	2025-02-02 00:00:00+01
-2	1	8999.00	2025-01-01 00:00:00+01
-3	3	9999.00	2025-03-03 00:00:00+01
-\.
+INSERT INTO public.payment VALUES (1, 2, 12999.00, '2025-02-02 00:00:00+01');
+INSERT INTO public.payment VALUES (2, 1, 8999.00, '2025-01-01 00:00:00+01');
+INSERT INTO public.payment VALUES (3, 3, 9999.00, '2025-03-03 00:00:00+01');
 
 
 --
@@ -427,11 +417,9 @@ COPY public.payment (id, orderid, amount, paymentdate) FROM stdin;
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.product (id, name, description, price, stockquantity, brandid, categoryid) FROM stdin;
-1	Galaxy S25	Flagship-phone	8999.00	56	1	1
-2	iPad 13 gen	11" tablet	12999.00	33	2	2
-3	iPad 16	Flagship-Apple	9999.00	48	1	1
-\.
+INSERT INTO public.product VALUES (1, 'Galaxy S25', 'Flagship-phone', 8999.00, 56, 1, 1);
+INSERT INTO public.product VALUES (2, 'iPad 13 gen', '11" tablet', 12999.00, 33, 2, 2);
+INSERT INTO public.product VALUES (3, 'iPad 16', 'Flagship-Apple', 9999.00, 48, 1, 1);
 
 
 --
@@ -440,11 +428,9 @@ COPY public.product (id, name, description, price, stockquantity, brandid, categ
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (userid, email, password, firstname, lastname, phonenumber, isadmin) FROM stdin;
-1	ola@nord.no	e43b4a66	Ola	Nordmann	47880403	f
-2	kari@nord.no	e3ec8fbb	Kari	Nordmann	92988565	t
-3	lise@nord.no	effddd46	Lise	Nordmann	98674085	f
-\.
+INSERT INTO public.users VALUES (1, 'ola@nord.no', 'e43b4a66', 'Ola', 'Nordmann', '47880403', false);
+INSERT INTO public.users VALUES (2, 'kari@nord.no', 'e3ec8fbb', 'Kari', 'Nordmann', '92988565', true);
+INSERT INTO public.users VALUES (3, 'lise@nord.no', 'effddd46', 'Lise', 'Nordmann', '98674085', false);
 
 
 --
@@ -683,7 +669,7 @@ ALTER TABLE ONLY public.product
     ADD CONSTRAINT product_ibfk_2 FOREIGN KEY (categoryid) REFERENCES public.category(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
--- Completed on 2025-05-20 11:32:35
+-- Completed on 2025-05-20 11:48:12
 
 --
 -- PostgreSQL database dump complete
