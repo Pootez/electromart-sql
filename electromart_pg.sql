@@ -7,7 +7,6 @@
 
 -- Started on 2025-05-20 11:48:11
 
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
